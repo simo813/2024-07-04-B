@@ -25,7 +25,7 @@ class View(ft.UserControl):
 
     def load_interface(self):
         # title
-        self._title = ft.Text("TdP 2024 - Esame del 04-07-2024 - A", color="blue", size=24)
+        self._title = ft.Text("TdP 2024 - Esame del 04-07-2024 - B", color="blue", size=24)
         self._page.controls.append(self._title)
 
         # First row with some controls
@@ -33,7 +33,7 @@ class View(ft.UserControl):
                                   hint_text="Anno da analizzare per gli avvistamenti.",
                                   on_change=self._controller.fill_ddstate)
         self._controller.fill_ddyear()
-        self.ddstate = ft.Dropdown(label="State",
+        self.ddstate = ft.Dropdown(label="Stato",
                                    hint_text="Stato da analizzare per gli avvistamenti.")
         self.btn_graph = ft.ElevatedButton(text="Crea Grafo",
                                            tooltip="Crea il grafo del punto 1",
