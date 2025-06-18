@@ -16,7 +16,10 @@ class View(ft.UserControl):
         self._title = None
         # first row
         self.ddyear = None
+        self.ddYearValue = None
         self.ddstate = None
+        self.ddStateValue = None
+
         self.btn_graph = None
         self.btn_path = None
         # second row
@@ -30,9 +33,9 @@ class View(ft.UserControl):
 
         # First row with some controls
         self.ddyear = ft.Dropdown(label="Anno",
-                                  hint_text="Anno da analizzare per gli avvistamenti.")
+                                  hint_text="Anno da analizzare per gli avvistamenti.", on_change=self.on_ddYear_change)
         self.ddstate = ft.Dropdown(label="Stato",
-                                   hint_text="Stato da analizzare per gli avvistamenti.")
+                                   hint_text="Stato da analizzare per gli avvistamenti.", on_change=self.on_ddState_change)
         self.btn_graph = ft.ElevatedButton(text="Crea Grafo",
                                            tooltip="Crea il grafo del punto 1",
                                            on_click=self._controller.handle_graph)
@@ -75,6 +78,7 @@ class View(ft.UserControl):
                       alignment=ft.MainAxisAlignment.SPACE_EVENLY,
                       spacing=50)
         self._page.controls.append(row2)
+        self._controller.fillDD()
         self._page.update()
 
         self._page.update()
@@ -95,6 +99,15 @@ class View(ft.UserControl):
         self._page.dialog = dlg
         dlg.open = True
         self._page.update()
+
+    def on_ddYear_change(self, e):
+        self.ddYearValue= self.ddyear.value
+        self._controller.fillDDStates()
+        self.update_page()
+
+    def on_ddState_change(self, e):
+        self.ddStateValue= self.ddstate.value
+        self.update_page()
 
     def update_page(self):
         self._page.update()
